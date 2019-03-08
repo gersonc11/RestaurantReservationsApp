@@ -20,29 +20,7 @@ app.use(express.json());
 // Restaurant DATA 
 // =============================================================
 
-var guestList = [
-    {
-        name: "Jason Bourne"
-    },
 
-    {
-        name: "Jane Doe"
-    },
-
-    {
-        name: "Eli Manning"
-    }
-]
-
-var putonWaitingList = [
-    {
-        name:"Darth Vadar"
-    },
-
-    {
-        name:"Yoshi"
-    }
-]
 
 // Routes
 // =============================================================
@@ -64,7 +42,7 @@ app.get("/", function(req, res) {
 
 // Displays all Reservations
 app.get("/api/reservations", function(req, res) {
-    return res.json(guestList);
+    return res.json(reservation);
   });
   
   // Display waitlist
@@ -74,17 +52,30 @@ app.get("/api/reservations", function(req, res) {
   });
 
 
-//   // Create New Guest -- take in JSON input
 
-//   app.post("/api/reservations", function(req, res) {
-//     var newGuest = req.body;
 
-//     newGuest.routeName = newGuest.name.replace(/\s+/g, "").toLowerCase();
+  
 
-//     console.log(newGuest);
-//     newGuest.push(guestList);
-//     res.json(newGuest);
-//   });
+
+
+//  function reserve() {
+  app.post("/api/reservations", function(req, res) {
+    var newGuest = req.body;
+    
+    newGuest.routeName = newGuest.name.replace(/\s+/g, "").toLowerCase();
+    console.log(reservation.length);
+    
+    if(reservation.length < 5) {
+      reservation.push(newGuest);
+      res.json(newGuest);
+    }
+    else {
+      waitList.push(newGuest);
+      res.json(newGuest);
+    }
+  });
+// }
+  
 
 
 // Starts the server to begin listening
